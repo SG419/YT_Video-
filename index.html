@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Youtube Preview</title>
+        <link
+            type="text/css"
+            rel="stylesheet"
+            href="../node_modules/video.js/dist/video-js.min.css"
+        />
+    </head>
+    <body>
+        <form>
+            <input id="video_url_input" />
+            <input type="button" value="Preview" onclick="getVideoURL()" />
+        </form>
+        <video
+            id="preview_frame"
+            class="video-js vjs-default-skin"
+            controls
+            autoplay
+            width="640"
+            height="264"
+            data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=fmI_Ndrxy14&list=RDr6zIGXun57U&index=3"}] }'
+        ></video>
+        <script src="../node_modules/video.js/dist/video.min.js"></script>
+        <script src="Youtube.min.js"></script>
+        <script>
+            function getVideoURL() {
+                let video_url = document.getElementById('video_url_input')
+                    .value;
+                videojs('preview_frame').ready(function () {
+                    var myPlayer = this;
+                    myPlayer.src({
+                        type: 'video/youtube',
+                        src: video_url,
+                    });
+                });
+            }
+        </script>
+    </body>
+</html>
